@@ -1,0 +1,68 @@
+{
+  "schema_version": "1",
+  "case_id": "authplane-v023-local-B",
+  "run": {
+    "isolated": true,
+    "http_requests": 32
+  },
+  "grant": {
+    "reference": "214PF0wHw_goL4RGcTKuDA",
+    "source_kind": "server_grant_record",
+    "approved_resources": [
+      "http://127.0.0.1:18760/mcp"
+    ]
+  },
+  "target_resource": "http://127.0.0.1:18761/mcp",
+  "controls": [
+    {
+      "target_resource": "http://127.0.0.1:18761/mcp",
+      "http_status": 401,
+      "effect": {
+        "before": 0,
+        "after": 0,
+        "source_kind": "server_counter",
+        "reference": "independent_B_state_1 -> independent_B_state_2"
+      },
+      "kind": "anonymous"
+    },
+    {
+      "target_resource": "http://127.0.0.1:18761/mcp",
+      "http_status": 401,
+      "effect": {
+        "before": 0,
+        "after": 0,
+        "source_kind": "server_counter",
+        "reference": "independent_B_state_3 -> independent_B_state_4"
+      },
+      "kind": "approved_token",
+      "grant_reference": "214PF0wHw_goL4RGcTKuDA"
+    },
+    {
+      "target_resource": "http://127.0.0.1:18761/mcp",
+      "http_status": 200,
+      "effect": {
+        "before": 0,
+        "after": 1,
+        "source_kind": "server_counter",
+        "reference": "independent_B_state_7 -> independent_B_state_8"
+      },
+      "kind": "legitimate_target",
+      "grant_reference": "d4ZkgiwEyksxQ28v1aML5g",
+      "approved_resources": [
+        "http://127.0.0.1:18761/mcp"
+      ]
+    }
+  ],
+  "candidate": {
+    "target_resource": "http://127.0.0.1:18761/mcp",
+    "http_status": 400,
+    "effect": {
+      "before": 0,
+      "after": 0,
+      "source_kind": "server_counter",
+      "reference": "independent_B_state_5 -> independent_B_state_6"
+    },
+    "grant_reference": "214PF0wHw_goL4RGcTKuDA",
+    "transition": "refresh-resource-change"
+  }
+}
