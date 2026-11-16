@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "oauth-grant-effect-audit"
-version = "0.1.0"
-description = "Offline evidence checker for OAuth resource grants and server-observed effects"
+version = "0.2.0"
+description = "Collector and evidence checker for OAuth grants and server-observed effects"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name = "Byung Hoon OH"}]
@@ -18,6 +18,7 @@ classifiers = [
 
 [project.scripts]
 grant-effect-audit = "grant_effect_audit.cli:main"
+grant-effect-collect = "grant_effect_audit.collector_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
