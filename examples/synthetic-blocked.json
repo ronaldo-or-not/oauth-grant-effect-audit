@@ -1,0 +1,41 @@
+{
+  "schema_version": "1",
+  "case_id": "synthetic-blocked-transition",
+  "run": {"isolated": true, "http_requests": 10},
+  "grant": {
+    "reference": "local-fixture-grant-A",
+    "source_kind": "consent_ui_resource_list",
+    "approved_resources": ["https://resource-a.example.test/mcp"]
+  },
+  "target_resource": "https://resource-b.example.test/mcp",
+  "controls": [
+    {
+      "kind": "anonymous",
+      "target_resource": "https://resource-b.example.test/mcp",
+      "http_status": 401,
+      "effect": {"before": 0, "after": 0, "source_kind": "server_database", "reference": "local-fixture-anonymous"}
+    },
+    {
+      "kind": "approved_token",
+      "grant_reference": "local-fixture-grant-A",
+      "target_resource": "https://resource-b.example.test/mcp",
+      "http_status": 401,
+      "effect": {"before": 0, "after": 0, "source_kind": "server_database", "reference": "local-fixture-A-token"}
+    },
+    {
+      "kind": "legitimate_target",
+      "grant_reference": "separate-local-B-grant",
+      "approved_resources": ["https://resource-b.example.test/mcp"],
+      "target_resource": "https://resource-b.example.test/mcp",
+      "http_status": 200,
+      "effect": {"before": 0, "after": 1, "source_kind": "server_database", "reference": "separate-local-B-grant"}
+    }
+  ],
+  "candidate": {
+    "transition": "refresh-request-target-changed",
+    "grant_reference": "local-fixture-grant-A",
+    "target_resource": "https://resource-b.example.test/mcp",
+    "http_status": 400,
+    "effect": {"before": 0, "after": 0, "source_kind": "server_database", "reference": "local-fixture-candidate"}
+  }
+}
