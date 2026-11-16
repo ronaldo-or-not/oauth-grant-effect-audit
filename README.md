@@ -6,7 +6,7 @@ An offline evidence checker for a narrow authorization question:
 
 The checker reads a redacted JSON record produced by an authorized test. It joins four pieces of evidence: the original grant, an attempted transition, two negative controls, and a server-side effect counter. A successful token or HTTP response alone is not treated as proof of an effect.
 
-This is a small, reusable **evidence evaluation tool**, not an autonomous vulnerability scanner or a claim that a particular product is vulnerable. The included data is synthetic and contains no vendor-specific reproduction.
+This is a small, reusable **evidence evaluation and collection tool**, not an autonomous vulnerability scanner or a claim that a particular product is vulnerable. The quick-start data is synthetic; a separate [local AuthPlane adapter](examples/authplane_local/README.md) demonstrates collection against an official authorization server release.
 
 ## Quick start
 
@@ -65,6 +65,10 @@ This classifier checks the structure and declared provenance of evidence. It can
 ```sh
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
+
+## Collecting from a local service
+
+`grant-effect-collect` accepts a trusted, service-specific Python adapter that keeps credentials in memory and returns only grant and effect observations. See the [adapter guide](docs/adapter-guide.md) and the [AuthPlane v0.2.3 local example](examples/authplane_local/README.md), including a redacted result from an official release. The collector runs negative controls first, stops before the candidate if those controls cause an effect, and makes the separate B-authorized effect call only when the candidate produces no effect. The default target policy permits loopback URIs only.
 
 ## Standards and scope
 
