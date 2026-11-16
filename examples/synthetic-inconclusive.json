@@ -1,0 +1,26 @@
+{
+  "schema_version": "1",
+  "case_id": "synthetic-missing-control",
+  "run": {"isolated": true, "http_requests": 4},
+  "grant": {
+    "reference": "local-fixture-grant-A",
+    "source_kind": "server_grant_record",
+    "approved_resources": ["https://resource-a.example.test/mcp"]
+  },
+  "target_resource": "https://resource-b.example.test/mcp",
+  "controls": [
+    {
+      "kind": "anonymous",
+      "target_resource": "https://resource-b.example.test/mcp",
+      "http_status": 401,
+      "effect": {"before": 0, "after": 0, "source_kind": "server_counter", "reference": "local-fixture-anonymous"}
+    }
+  ],
+  "candidate": {
+    "transition": "refresh-request-target-changed",
+    "grant_reference": "local-fixture-grant-A",
+    "target_resource": "https://resource-b.example.test/mcp",
+    "http_status": 200,
+    "effect": {"before": 0, "after": 1, "source_kind": "server_counter", "reference": "local-fixture-candidate"}
+  }
+}
